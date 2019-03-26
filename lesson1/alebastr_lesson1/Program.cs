@@ -10,6 +10,16 @@ namespace alebastr_lesson1
     {
         static void Main(string[] args)
         {
+            #region Деление
+            uint a, b;
+            Console.Write("Делимое:");
+            a = uint.Parse(Console.ReadLine());
+            Console.Write("Делитель:");
+            b = uint.Parse(Console.ReadLine());
+            uint rem;
+            Console.WriteLine($"Частное: {div(a, b, out rem)} Остаток: {rem}");
+            Console.ReadKey();
+            #endregion
             #region Нечетные цифры в числе
             Console.Write("Число: ");
             Console.WriteLine($"{IsOddDigit(uint.Parse(Console.ReadLine()))}");
@@ -52,6 +62,24 @@ namespace alebastr_lesson1
             Console.WriteLine("Любую клавишу для выхода.");
             Console.ReadKey();
             #endregion
+        }
+        /// <summary>
+        /// Метод деления а на b
+        /// </summary>
+        /// <param name="a">Делимое</param>
+        /// <param name="b">Делитель</param>
+        /// <param name="remaid">Остаток от деления</param>
+        /// <returns>Частное от деления</returns>
+        static uint div(uint a, uint b, out uint remaid)
+        {
+            uint result=0;
+            while (a > b)
+            {
+                a = a - b;
+                result++;
+            }
+            remaid = a;
+            return result;
         }
         /// <summary>
         /// метод ищет нечетные цифры в числе
