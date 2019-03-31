@@ -10,7 +10,28 @@ namespace lesson2
     {
         static void Main(string[] args)
         {
-
+            #region Задание 3 Определить, сколько существует программ, которые преобразуют число 3 в число 20
+            //R(n)=R(n-1)+R(n/2)
+            //*2, +1
+            //from 3 to 20
+            const int a0 = 3;
+            const int a1 = 20;
+            int[] array = new int[a1 + 1];
+            int i=a0;
+            array[a0] = 1;
+            while(i < a1){
+                i++;
+                if (i % 2 != 0) array[i] = array[i - 1];
+                else array[i] = array[i - 1] + array[i / 2];
+            }
+            for (int j = 0; j < a1+1; j++)
+            {
+                Console.WriteLine($"{j} {array[j]}");
+            }
+            Console.WriteLine($"От {a0} до {ф1} - {array[i]} программ");
+            Console.WriteLine($"Рекурсивный метод - {progs(a0, a1)}");
+            Console.ReadKey();
+            #endregion
 
             #region Задание 2 Возведение в степень
             int num, st;
@@ -29,6 +50,19 @@ namespace lesson2
             Console.Write($"Двоичное представление: {ToBin(a)}");
             Console.ReadKey();
             #endregion
+        }
+        /// <summary>
+        /// Рекурсивный метод определения количества программ для преобразования из числа a в b
+        /// </summary>
+        /// <param name="a">Число а</param>
+        /// <param name="b">Число b</param>
+        /// <returns>Количество программ</returns>
+        static int progs(int a, int b)
+        {
+            if (b == a) return 1;
+            else if (b < a) return 0;
+            else if (b % 2 != 0) return progs(a, b - 1);
+            else return progs(a, b - 1) + progs(a, b / 2);
         }
         /// <summary>
         /// Функция перевода из 10-чного представления в двоичное
