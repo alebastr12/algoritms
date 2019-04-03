@@ -12,7 +12,7 @@ namespace lesson3_alebastr
     {
         static void Main(string[] args)
         {
-            int n = 50000;
+            int n = 1000;
             Random r = new Random();
             int[] a = new int[n];
             int[] b = new int[n];
@@ -20,7 +20,7 @@ namespace lesson3_alebastr
             int[] d = new int[n];
             int[] e = new int[n];
 
-            for (int j = 0; j < 1; j++)
+            for (int j = 0; j < 5; j++)
             {
                 for (int i = 0; i < n; i++)
                 {
