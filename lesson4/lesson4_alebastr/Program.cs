@@ -24,6 +24,7 @@ namespace lesson4_alebastr
             #endregion
 
             #region Обход доски конем
+            Console.WriteLine("Обходдоски конем:");
             if (SearchSolution(0, 0, 1))
             {
                 for (int i = 0; i < desc.GetLength(0); i++)
