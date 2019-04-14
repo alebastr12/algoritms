@@ -43,6 +43,26 @@ Node* getFreeNode(T value, Node *parent) {
 	tmp->parent = parent;
 	return tmp;
 }
+//Поиск элемента
+Node * findElement(Node **head, int value) {
+	if (*head == NULL) {
+		return NULL;
+	}
+	Node *tmp = NULL;
+	Node *res = NULL;
+	tmp = *head;
+	while (tmp) {
+		if (value == tmp->data) {
+			res = tmp;
+			break;
+		}
+		else if (value > tmp->data) 
+				tmp = tmp->right;
+		else if (value < tmp->data) 
+				tmp = tmp->left;
+	}
+	return res;
+}
 
 // Вставка узла
 void insert(Node **head, int value) {
@@ -97,12 +117,29 @@ void preOrderTravers(Node* root) {
 	}
 }
 
+void inOrderTravers(Node* root) {
+	if (root) {
+		inOrderTravers(root->left);
+		printf("%d ", root->data);
+		inOrderTravers(root->right);
+	}
+}
+
+void postOrderTravers(Node* root) {
+	if (root) {
+		postOrderTravers(root->left);
+		postOrderTravers(root->right);
+		printf("%d ", root->data);
+	}
+}
+
+
 
 int main() {
 	setlocale(LC_ALL, "Rus");
 
 	Node *Tree = NULL;
-	FILE* file = fopen("data.txt", "r");
+	FILE* file = fopen("c:\\Users\\Алкесандр\\source\\repos\\algoritms\\lesson6\\Debug\\data.txt", "r");
 	if (file == NULL)
 	{
 		puts("Can't open file!");
@@ -121,7 +158,21 @@ int main() {
 	printTree(Tree);
 	printf("\nPreOrderTravers:");
 	preOrderTravers(Tree);
+	printf("\nInOrderTravers:");
+	inOrderTravers(Tree);
+	printf("\nPostOrderTravers:");
+	postOrderTravers(Tree);
+	printf("\nНайти элемент:");
 
+	int val;
+	scanf("%d",&val);
+	Node* elem = findElement(&Tree, val);
+	if (elem==NULL)
+		printf("\nЭлемент не найден");
+	else 
+		printf("\nНайден элемент %d",elem->data);
+
+	printf("\n");
 	system("pause");
 	return 0;
 }
