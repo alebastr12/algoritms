@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include <malloc.h>
+#include <string.h>
 
 typedef int T;
 typedef struct Node {
@@ -10,6 +11,19 @@ typedef struct Node {
 	struct Node *right;
 	struct Node *parent;
 } Node;
+
+//Хэш функция
+int hash(char * string) {
+	if (string == NULL) return 0;
+	int i = 0;
+	int res = 0;
+	int strlength = strlen(string);
+	while (i < strlength) {
+		res = (res * 1664525) + (unsigned char)string[i] + 1013904223; 
+		i++;
+	}
+	return res;
+}
 
 // Распечатка двоичного дерева в виде скобочной записи
 void printTree(Node *root) {
@@ -138,6 +152,16 @@ void postOrderTravers(Node* root) {
 int main() {
 	setlocale(LC_ALL, "Rus");
 
+#pragma region Хэш функция
+	char str[128];
+	printf("Введите строку:");
+	scanf("%s", &str);
+	printf("\nХэш строки: %d",hash(str));
+	printf("\n");
+	system("pause");
+#pragma endregion
+
+#pragma region Двоичное дерево поиска
 	Node *Tree = NULL;
 	FILE* file = fopen("c:\\Users\\Алкесандр\\source\\repos\\algoritms\\lesson6\\Debug\\data.txt", "r");
 	if (file == NULL)
@@ -165,14 +189,16 @@ int main() {
 	printf("\nНайти элемент:");
 
 	int val;
-	scanf("%d",&val);
+	scanf("%d", &val);
 	Node* elem = findElement(&Tree, val);
-	if (elem==NULL)
+	if (elem == NULL)
 		printf("\nЭлемент не найден");
-	else 
-		printf("\nНайден элемент %d",elem->data);
+	else
+		printf("\nНайден элемент %d", elem->data);
 
 	printf("\n");
 	system("pause");
+#pragma endregion
+
 	return 0;
 }
